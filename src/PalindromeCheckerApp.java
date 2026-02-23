@@ -1,28 +1,46 @@
 import java.util.Stack;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+import java.util.Scanner;
+
 public class PalindromeCheckerApp {
+
     public static void main(String[] args) {
 
-        String input = "noon";
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a word: ");
+        String input = scanner.nextLine();
+
+        input = input.replaceAll("\\s+", "").toLowerCase();
+
+        Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
 
-        for (int i = 0; i < input.length(); i++) {
-            stack.push(input.charAt(i));
+        for (char ch : input.toCharArray()) {
+            queue.add(ch);
+            stack.push(ch);
         }
 
         boolean isPalindrome = true;
 
-        for (int i = 0; i < input.length(); i++) {
-            if (input.charAt(i) != stack.pop()) {
+        while (!queue.isEmpty()) {
+            char fromQueue = queue.remove();
+            char fromStack = stack.pop();
+
+            if (fromQueue != fromStack) {
                 isPalindrome = false;
                 break;
             }
         }
 
-        System.out.println("Input String: " + input);
         if (isPalindrome) {
-            System.out.println("Result: The string is a palindrome.");
+            System.out.println("Result: \"" + input + "\" is a PALINDROME.");
         } else {
-            System.out.println("Result: The string is NOT a palindrome.");
+            System.out.println("Result: \"" + input + "\" is NOT a PALINDROME.");
         }
+
+        scanner.close();
     }
 }
