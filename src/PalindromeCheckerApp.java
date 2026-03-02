@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
@@ -8,7 +9,10 @@ public class PalindromeCheckerApp {
         System.out.print("Input : ");
         String input = scanner.nextLine();
 
-        boolean result = check(input, 0, input.length() - 1);
+
+        String normalized = input.replaceAll("\\s+", "").toLowerCase();
+
+        boolean result = check(normalized, 0, normalized.length() - 1);
 
         System.out.println("Is Palindrome? : " + result);
 
