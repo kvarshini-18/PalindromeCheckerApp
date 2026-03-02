@@ -9,26 +9,36 @@ public class PalindromeCheckerApp {
         System.out.print("Input : ");
         String input = scanner.nextLine();
 
-
-        String normalized = input.replaceAll("\\s+", "").toLowerCase();
-
-        boolean result = check(normalized, 0, normalized.length() - 1);
+        PalindromeService service = new PalindromeService();
+        boolean result = service.checkPalindrome(input);
 
         System.out.println("Is Palindrome? : " + result);
 
         scanner.close();
     }
+}
 
-    private static boolean check(String s, int start, int end) {
+class PalindromeService {
 
-        if (start >= end) {
-            return true;
-        }
+    public boolean checkPalindrome(String input) {
 
-        if (s.charAt(start) != s.charAt(end)) {
+        if (input == null) {
             return false;
         }
 
-        return check(s, start + 1, end - 1);
+        int start = 0;
+        int end = input.length() - 1;
+
+        while (start < end) {
+
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
+            }
+
+            start++;
+            end--;
+        }
+
+        return true;
     }
 }
